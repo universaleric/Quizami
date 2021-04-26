@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS quizami_db;
+CREATE DATABASE quizami_db;
