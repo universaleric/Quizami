@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quizami</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../public/css/jass.css" />
+    <link rel="stylesheet" href="../public/css/style.css" />
+    <!-- Use for styling during mock up -->
+    <link rel="stylesheet" href="./mockstyle.css" />
+  </head>
+
+    <body>
+    <div class="flex-column justify-space-around">
+      <header class="display-flex justify-space-between align-center p-2">
+        <h1>
+          <span role="img" aria-label="quiz">🤨</span>
+          <a href="/">Quizami</a>
+        </h1>
+
+        <nav>
+          <a href="/profile">profile</a> |
+          <button class="no-button" id="logout">logout</button>
+          <a href="/login">login</a>
+        </nav>
+      </header>
+
+      <main class="container container-fluid mt-5">
+        
+        
+        
+        
+        
+        <!-- Handlebars snippit -->
+
+        <header>
+            <button class="hss"><p class ="score">Highscores</p></button>
+            <button class="time"><p class="timer">Seconds</p></button>
+            <button class="hss"><p class ="score">Quiz: Anthony</p></button>
+        </header>
+
+        <button class="startBtn">
+            <p>Start</p>
+        </button>
+
+        <div class="questContain">
+            <h2 class="question">Question text</h2>
+            <div class="answerBtnCon">
+                <button class="answerBtn" id="answerchoicea"><p>Answer Text</p></button>
+                <button class="answerBtn" id="answerchoiceb"><p>And more</p></button>
+                <button class="answerBtn" id="answerchoicec"><p>???</p></button>
+                <button class="answerBtn" id="answerchoiced"><p>ok</p></button>
+          </div>
+        </div>
+
+
+
+        <!-- Handlebars snippit -->
+
+
+
+      </main>
+      <footer></footer>
+    </div>
+
+    <script src="../public/js/quiztaker.js"></script>
+    <!-- <script src="/js/logout.js"></script> -->
+  </body>
+</html>
