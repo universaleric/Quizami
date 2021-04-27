@@ -20,9 +20,30 @@ let secondsLeft = 1;
 let score = 0;
 let currentQuest = 0;
 
-const questionsJSON = ('../../mockup/mockQseed.json');
+// const questionsData = require('../../mockup/mockQseed.json');
 
-console.log(questionsJSON)
+
+
+// await fetch("../../mockup/mockQseed.json")
+//   .then(questionJSON => questionJSON.json())
+//   .then(questionData => questions = questionData);
+//   .then(questionData => questQuest(questionData));
+//   .then(questionData => console.log(questionData));
+
+questQuest()
+
+async function questQuest () {
+
+    await fetch("../../mockup/mockQseed.json")
+    .then(questionJSON => questionJSON.json())
+    .then(questionData => questi = questionData);
+
+    console.log(questi)
+    
+    return questions = questi
+}
+
+// console.log(questionsData)
 
 
 let questions = [
@@ -77,6 +98,9 @@ let questions = [
     ]},
   
 ]
+
+
+console.log(questions)
 
 setTime();
 
