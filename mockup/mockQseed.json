@@ -1,0 +1,51 @@
+[
+  {
+    "question": "What's my favorite color?", 
+    "answers":[
+      { "text": "Green", "correct": false},
+      { "text": "Blue", "correct": false},
+      { "text": "Red", "correct": true},
+      { "text": "Black", "correct": false}
+    ]},
+  {
+    "question": "What's my favorite band?", 
+    "answers":[
+      { "text": "Vampire Weekend", "correct": true},
+      { "text": "The Strokes", "correct": false},
+      { "text": "Glass Animals", "correct": false},
+      { "text": "Bombay Bicyle Club", "correct": false}
+    ]},
+  {
+    "question": "What is my birthday? 🤨", 
+    "answers":[
+      { "text": "August 20", "correct": false},
+      { "text": "August 21", "correct": true},
+      { "text": "August 22", "correct": false},
+      { "text": "August 24", "correct": false}
+    ]},
+  {
+    "question": "What's my favorite food?", 
+    "answers":[
+      { "text": "Gyros", "correct": false},
+      { "text": "Pizza", "correct": false},
+      { "text": "Tacos", "correct": true},
+      { "text": "Sushi", "correct": false}
+    ]},
+  {
+    "question": "What's my dream vacation?", 
+    "answers":[
+      { "text": "Athens", "correct": false},
+      { "text": "Iceland", "correct": false},
+      { "text": "Tokyo", "correct": true},
+      { "text": "Fiji", "correct": false}
+    ]},
+  {
+    "question": "Which TV Show would I pick if I could only watch one for the rest of my life?", 
+    "answers":[
+      { "text": "Midnight Gospel", "correct": false},
+      { "text": "Game Of Thrones", "correct": false},
+      { "text": "Parks and Rec", "correct": true},
+      { "text": "The Office", "correct": false}
+    ]}
+]
+
