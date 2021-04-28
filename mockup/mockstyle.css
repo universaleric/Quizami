@@ -97,7 +97,7 @@ button, input {
   transition: 0.3s;
   justify-content: space-around;
 }
-.answerBtnCon input {
+.answerBtnCon input, .answerBtnCon button {
   margin: 10px;
   justify-content: space-around;
   border-radius: 15px;

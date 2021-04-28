@@ -4,6 +4,7 @@ let timeBtnEl = document.querySelector(".time");
 let HighSBtnEl = document.querySelector(".hss");
 let timerEl = document.querySelector(".timer");
 let mainEl = document.querySelector(".main");
+let questCreatedSetEl = document.querySelector(".questCreatedSet");
 
 let finalScoreEl = document.querySelector(".finalScore")
 let endScreenEl = document.querySelector(".endScreen")
@@ -117,9 +118,11 @@ let highscorelog = document.querySelector("#highscorelog");
 let draftList = document.querySelector("#draftlist");
 let clearHSBtnEl = document.querySelector(".clearHighScores");
 let saveQuestBtnEl = document.querySelector(".saveQuest");
+let finishQuizBtnEl = document.querySelector(".finishQuiz");
 let playAgainBtnEl = document.querySelector(".playAgain");
 
 let workingQuestions = [];
+let numberedQuestions = [];
 
 function renderHighScores() {
   workingQuestions.innerHTML = "";
@@ -133,35 +136,19 @@ function renderHighScores() {
   }
 }
 
-function storeHighscores() {
-
-    console.log(workingQuestions)
-//   localStorage.setItem("highscores", JSON.stringify(highscores));
-}
-
-saveQuestBtnEl.addEventListener("click", async function(event) {
+finishQuizBtnEl.addEventListener("click",  async function (event) {
   event.preventDefault();
-  
-  let question = questInputEl.value.trim();
-  let response_1 = answerInputAEl.value.trim();
-  let response_2 = answerInputBEl.value.trim();
-  let response_3 = answerInputCEl.value.trim();
-  let response_4 = answerInputDEl.value.trim();
-  let correct_response = correctRInputEl.value
-  // let quiz_id = parseInt(document.location.pathname.split('/')[document.location.pathname.split('/').length-1])
-  let quiz_id = 1
 
-  
-  
-  workingQuestions.push({question, response_1, response_2, response_3, response_4, correct_response, quiz_id});
   console.log(workingQuestions)
-  
-  storeHighscores();
-  renderHighScores();
-  if (question && response_1 && response_2 && response_3 && response_4 && correct_response && quiz_id) {
+  console.log(JSON.stringify(workingQuestions))
+  //  localStorage.setItem("highscores", JSON.stringify(highscores));
+
+  // if (question && response_1 && response_2 && response_3 && response_4 && correct_response && quiz_id) {
+  if (workingQuestions) {
     const response = await fetch(`/api/question/`, {
       method: 'POST',
-      body: JSON.stringify({question, response_1, response_2, response_3, response_4, correct_response, quiz_id}),
+      // body: JSON.stringify({question, response_1, response_2, response_3, response_4, correct_response, quiz_id}),
+      body: JSON.stringify(workingQuestions),
       headers: {
         'Content-Type': 'application/json',
       },
@@ -175,11 +162,45 @@ saveQuestBtnEl.addEventListener("click", async function(event) {
     }
   }
 
-
-
-
-
 });
+
+saveQuestBtnEl.addEventListener("click", function(event) {
+  event.preventDefault();
+
+  document.getElementById('qcSet').innerHTML = "";
+  
+  let qnumber = workingQuestions.length + 1;
+  let question = questInputEl.value.trim();
+  let response_1 = answerInputAEl.value.trim();
+  let response_2 = answerInputBEl.value.trim();
+  let response_3 = answerInputCEl.value.trim();
+  let response_4 = answerInputDEl.value.trim();
+  let correct_response = correctRInputEl.value
+  // let quiz_id = parseInt(document.location.pathname.split('/')[document.location.pathname.split('/').length-1])
+  let quiz_id = 1
+ 
+  workingQuestions.push({question, response_1, response_2, response_3, response_4, correct_response, quiz_id});
+  numberedQuestions.push({qnumber, question, response_1, response_2, response_3, response_4, correct_response, quiz_id});
+
+  let workingQbtns = [numberedQuestions.map(questDraft => `<button class="questCand" id="${questDraft.qnumber}">${questDraft.qnumber}</button>`)];  
+  
+  console.log(workingQuestions)
+  console.log(numberedQuestions)
+
+  for (let i = 0; i < workingQbtns.length; i++) {
+    
+    // questCreatedSetEl.append(workingQbtns[i])
+    // document.getElementById("qcSet").appendChild(workingQbtns[i]);
+    document.getElementById('qcSet').innerHTML += workingQbtns[i];
+
+
+  }
+
+ }
+)
+
+
+
 
 clearHSBtnEl.addEventListener("click", function(event){
   event.preventDefault();
