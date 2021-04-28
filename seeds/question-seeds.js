@@ -3,21 +3,26 @@ const { Question } = require('../models');
 const questionData = [
 
     {
-        first_name: "julian",
+        question:"",
     },
     {
-        last_name: "almendarez",
+        response_1:"",
     },
     {
-        email: "julian@yahoo.com",
+        response_2:"",
     },
     {
-        username: "stbxzr",
+        response_3:"",
     },
     {
-        password: "n/a",
+        response_4:"",
     },
-
+    {
+        correct_response:"",
+    },
+    {
+        quiz_id:[],
+    },
 ];
 
 const seedQuestion = () => Question.bulkCreate(questionData);

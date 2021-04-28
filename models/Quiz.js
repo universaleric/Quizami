@@ -22,6 +22,9 @@ Quiz.init(
         key: 'id',
       },
     },
+    question_length: {
+      type: DataTypes.INTEGER,
+    },
   },
   {
     sequelize,

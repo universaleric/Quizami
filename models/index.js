@@ -1,13 +1,17 @@
+const Question = require('./Question');
+const Quiz = require('./Quiz');
+const Score = require('./Score');
 const User = require('./User');
-const Project = require('./Project');
 
-User.hasMany(Project, {
-  foreignKey: 'user_id',
-  onDelete: 'CASCADE'
-});
+// User.hasMany(Project, {
+//   foreignKey: 'user_id',
+//   onDelete: 'CASCADE'
+// });
 
-Project.belongsTo(User, {
-  foreignKey: 'user_id'
-});
+// Project.belongsTo(User, {
+//   foreignKey: 'user_id'
+// });
 
-module.exports = { User, Project };
+module.exports = { Question, Quiz, Score, User };
+
+//havent added "project"
