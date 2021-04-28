@@ -10,30 +10,30 @@ Question.init(
       allowNull: false,
       primaryKey: true,
       autoIncrement: true,
-    }, 
+    },
     question: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     response_1: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     response_2: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     response_3: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     response_4: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     correct_response: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
 
     quiz_id: {
