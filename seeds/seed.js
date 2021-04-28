@@ -1,25 +1,27 @@
+const seedQuestion = require('./question-seeds');
+const seedQuiz = require('./quiz-seeds');
+const seedScore = require('./score-seeds');
+const seedUser = require('./user-seeds');
+
 const sequelize = require('../config/connection');
-const { User, Project } = require('../models');
 
-const userData = require('./userData.json');
-const projectData = require('./projectData.json');
-
-const seedDatabase = async () => {
+const seedAll = async () => {
   await sequelize.sync({ force: true });
+  console.log('\n----- DATABASE SYNCED -----\n');
+  
+  await seedQuestion ();
+  console.log('\n----- QUESTION SEEDED -----\n');
 
-  const users = await User.bulkCreate(userData, {
-    individualHooks: true,
-    returning: true,
-  });
+  await seedQuiz();
+  console.log('\n----- QUIZ SEEDED -----\n');
 
-  for (const project of projectData) {
-    await Project.create({
-      ...project,
-      user_id: users[Math.floor(Math.random() * users.length)].id,
-    });
-  }
+  await seedScore();
+  console.log('\n----- SCORE SEEDED -----\n');
+
+  await seedUser();
+  console.log('\n----- USER SEEDED -----\n');
 
   process.exit(0);
 };
 
-seedDatabase();
+seedAll();
