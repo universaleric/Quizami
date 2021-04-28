@@ -43,6 +43,7 @@ header button.time {
 
 h1,
 h2,
+.question,
 ol,
 li {
   text-align: center;
@@ -51,7 +52,14 @@ li {
   font-style: italic;
 }
 
-.questContain h2,
+.question {
+  padding: 15px;
+  font-size: 1.5em;
+  font-weight: bolder;
+  min-height: 120px;
+}
+
+.questContain input,
 .endScreen h2 {
   justify-content: center;
   align-items: center;
@@ -75,7 +83,7 @@ label {
   justify-content: center;
 }
 .endScreen input,
-button {
+button, input {
   border-radius: 15px;
   border-color: var(--accent);
   border-style: solid;
@@ -89,7 +97,7 @@ button {
   transition: 0.3s;
   justify-content: space-around;
 }
-.answerBtnCon button {
+.answerBtnCon input {
   margin: 10px;
   justify-content: space-around;
   border-radius: 15px;
@@ -97,6 +105,17 @@ button {
   background-color: #1b89bc;
   padding: 10px;
   min-height: 70px;
+  min-width: 95%;
+}
+
+.answerBtnCon select {
+  margin: 10px;
+  justify-content: space-around;
+  border-radius: 15px;
+  color: white;
+  background-color: #1b89bc;
+  padding: 10px;
+  min-height: 35px;
   min-width: 95%;
 }
 
