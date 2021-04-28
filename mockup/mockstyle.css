@@ -1,0 +1,182 @@
+/* *,
+*::before,
+*::after {
+  box-sizing: border-box;
+  font-family: futura, Arial, Helvetica, sans-serif;
+} */
+
+:root {
+  --accent: #1b89bc;
+}
+body {
+  background-color: whitesmoke;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  justify-content: space-between;
+  display: flex;
+  flex-wrap: wrap;
+}
+header button {
+  font-size: 16px;
+  padding: 5px;
+  border-radius: 15px;
+}
+header button p {
+  margin: 0 auto;
+}
+header button.hss {
+  margin-left: 20px;
+  margin-top: 20px;
+  color: #1b89bc;
+  display: flex;
+}
+header button.time {
+  margin-top: 20px;
+  margin-right: 20px;
+  background-color: #1b89bc;
+  color: white;
+  display: none;
+}
+
+h1,
+h2,
+.question,
+ol,
+li {
+  text-align: center;
+  margin: 40px auto;
+  color: #1b89bc;
+  font-style: italic;
+}
+
+.question {
+  padding: 15px;
+  font-size: 1.5em;
+  font-weight: bolder;
+  min-height: 120px;
+}
+
+.questContain input,
+.endScreen h2 {
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+.questContain,
+.endScreen {
+  max-width: 86%;
+  margin: 5% auto;
+  display: none;
+  box-shadow: 0 4px 8px 0 #1b89bc;
+  border-radius: 15px;
+  border-style: none;
+  padding: 10px;
+}
+
+.endScreen p,
+label {
+  color: var(--accent);
+  font-size: 16px;
+  justify-content: center;
+}
+.endScreen input,
+button, input {
+  border-radius: 15px;
+  border-color: var(--accent);
+  border-style: solid;
+}
+
+.answerBtnCon,
+.HSCon {
+  width: 50%;
+  margin: auto;
+  border-radius: 8px;
+  transition: 0.3s;
+  justify-content: space-around;
+}
+.answerBtnCon input {
+  margin: 10px;
+  justify-content: space-around;
+  border-radius: 15px;
+  color: white;
+  background-color: #1b89bc;
+  padding: 10px;
+  min-height: 70px;
+  min-width: 95%;
+}
+
+.answerBtnCon select {
+  margin: 10px;
+  justify-content: space-around;
+  border-radius: 15px;
+  color: white;
+  background-color: #1b89bc;
+  padding: 10px;
+  min-height: 35px;
+  min-width: 95%;
+}
+
+.HSCon p,
+ol,
+label,
+input {
+  display: flex;
+  margin: 10px auto;
+  width: 100%;
+}
+.HSCon button {
+  display: flex;
+  margin: 10px auto;
+  width: 80%;
+  background-color: var(--accent);
+  color: white;
+  justify-content: center;
+}
+
+.startBtn {
+  display: flex;
+  width: fit-content;
+  height: fit-content;
+  margin: 10% auto;
+  transition: 0.3s;
+  color: white;
+  background-color: #1b89bc;
+  border-radius: 15px;
+}
+
+.startBtn p {
+  margin: auto;
+  font-size: xx-large;
+}
+p.startBtn {
+  font-size: 16px;
+  padding: 6px;
+  margin-top: 0px;
+  text-align: center;
+}
+
+button {
+  border-color: var(--accent);
+  border-style: solid;
+}
+button:hover,
+input:hover {
+  opacity: 0.75;
+  border-style: solid;
+  border-radius: 45px;
+  border-color: #065b83;
+  cursor: pointer;
+}
+button:focus,
+input:focus {
+  outline-style: none;
+  border-style: solid;
+  border-color: #065b83;
+}
+header button:focus {
+  border-radius: 45px;
+  transform: scale(1.2);
+}
