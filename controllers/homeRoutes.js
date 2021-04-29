@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
       include: [
         {
           model: User,
-          attributes: ['name'],
+          attributes: ['username'],
         },
       ],
     });
@@ -33,7 +33,7 @@ router.get('/quiz/:id', async (req, res) => {
       include: [
         {
           model: User,
-          attributes: ['name'],
+          attributes: ['username'],
         },
       ],
     });
@@ -42,6 +42,32 @@ router.get('/quiz/:id', async (req, res) => {
 
     res.render('quiz', {
       ...quiz,
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get('/highScores', async (req, res) => {
+  try {
+    // Get all scores and JOIN with user and quiz data
+    const scoreData = await Score.findAll({
+      include: [
+        {
+          model: Quiz,
+          model: User,
+          attributes: ['username'],
+        },
+      ],
+    });
+
+    // Serialize data so the template can read it
+    const scores = scoreData.map((score) => score.get({ plain: true }));
+
+    // Pass serialized data and session flag into template
+    res.render('highScores', {
+      scores,
       logged_in: req.session.logged_in,
     });
   } catch (err) {
