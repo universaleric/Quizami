@@ -227,7 +227,7 @@ async function endGame() {
       // document.location.replace('/profile');
       console.log(question)
     } else {
-      alert('Failed to create project');
+      alert('Failed to create score data');
     }
   }
 }
