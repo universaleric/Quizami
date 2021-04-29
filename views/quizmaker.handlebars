@@ -1,64 +1,78 @@
-            <header>
-                <button class="hss"><p class ="score">Quit</p></button>
-                <div class="questCreatedSet" id = "qcSet">
+<header>
+    <button class="hss">
+        <p class="score">Quit</p>
+    </button>
+    <div class="questCreatedSet" id="qcSet">
 
-                </div>
-                <button class="time"><p class="timer">Seconds</p></button>
-                <button class="hss"><p class ="score">Quiz: {{quiz.name}}</p></button>
-            </header>
+    </div>
+    <button class="time">
+        <p class="timer">Seconds</p>
+    </button>
+    <button class="hss">
+        <p class="score">Quiz: {{quiz.name}}</p>
+    </button>
+</header>
 
-            <button class="startBtn">
-                <p>Start</p>
-            </button>
+<button class="startBtn">
+    <p>Start</p>
+</button>
 
-            <div class="questContain">
-                <!-- <h2 class="question">Question text</h2> -->
-                <!-- <label for="answerchoicea">Question to ask:</label> -->
-                
-
-                <input class="question" placeholder="Write your question..." aria-placeholder="Write question...." id="writtenQuest"></input>
-                    
-                    
-                <div class="answerBtnCon">
-                    <label for="answerchoicea"><p>Answer Choice A</p>:</label>
-                    <input class="answerBtn" id="answerchoicea"></input>
-                    <label for="answerchoiceb"><p>Answer Choice B</p>:</label>
-                    <input class="answerBtn" id="answerchoiceb"></input>
-                    <label for="answerchoicec"><p>Answer Choice C</p>:</label>
-                    <input class="answerBtn" id="answerchoicec"></input>
-                    <label for="answerchoiced"><p>Answer Choice D</p>:</label>
-                    <input class="answerBtn" id="answerchoiced"></input>
-                    <label for="correctR">Choose the correct answer:</label>
-                    <select id="correctR" name="correctR">
-                        <option value="">--Select--</option>
-                        <option value="1">Answer Choice A</option>
-                        <option value="2">Answer Choice B</option>
-                        <option value="3">Answer Choice C</option>
-                        <option value="4">Answer Choice D</option>
-                    </select>
-                
-                    
-                    <button class="saveQuest">Add</button>
-                    <button class="finishQuiz">Finish</button>
-                </div>
-            </div>
+<div class="questContain">
+    <!-- <h2 class="question">Question text</h2> -->
+    <!-- <label for="answerchoicea">Question to ask:</label> -->
 
 
-            <div class="endScreen">
-                <h2 class="finalScore"></h2>
-                <div class="HSCon">
-                    <p>Questions Added:</p>
-                    <ol id="draftlist"></ol>
-                    <form id="highscorelog" method="POST">
-                        <label for="highscoreinitial-text">Add your score: </label>
-                        <input type="text" placeholder="Initials" name="userinitials" id="initialsText"/>
-                        <button class="saveHighScores">Save</button>
-                        <button class="clearHighScores">Clear</button>
-                        <button class="playAgain">Play Again</button>
-                    </form> 
-                </div>
-            </div>
+    <input class="question" placeholder="Write your question..." aria-placeholder="Write question...."
+        id="writtenQuest"></input>
 
-    
-<script src="../public/js/quizmaker.js"></script>
 
+    <div class="answerBtnCon">
+        <label for="answerchoicea">
+            <p>Answer Choice A</p>:
+        </label>
+        <input class="answerBtn" id="answerchoicea"></input>
+        <label for="answerchoiceb">
+            <p>Answer Choice B</p>:
+        </label>
+        <input class="answerBtn" id="answerchoiceb"></input>
+        <label for="answerchoicec">
+            <p>Answer Choice C</p>:
+        </label>
+        <input class="answerBtn" id="answerchoicec"></input>
+        <label for="answerchoiced">
+            <p>Answer Choice D</p>:
+        </label>
+        <input class="answerBtn" id="answerchoiced"></input>
+        <label for="correctR">Choose the correct answer:</label>
+        <select id="correctR" name="correctR">
+            <option value="">--Select--</option>
+            <option value="1">Answer Choice A</option>
+            <option value="2">Answer Choice B</option>
+            <option value="3">Answer Choice C</option>
+            <option value="4">Answer Choice D</option>
+        </select>
+
+
+        <button class="saveQuest">Add</button>
+        <button class="finishQuiz">Finish</button>
+    </div>
+</div>
+
+
+<div class="endScreen">
+    <h2 class="finalScore"></h2>
+    <div class="HSCon">
+        <p>Questions Added:</p>
+        <ol id="draftlist"></ol>
+        <form id="highscorelog" method="POST">
+            <label for="highscoreinitial-text">Add your score: </label>
+            <input type="text" placeholder="Initials" name="userinitials" id="initialsText" />
+            <button class="saveHighScores">Save</button>
+            <button class="clearHighScores">Clear</button>
+            <button class="playAgain">Play Again</button>
+        </form>
+    </div>
+</div>
+
+
+<script src="/js/quizmaker.js"></script>

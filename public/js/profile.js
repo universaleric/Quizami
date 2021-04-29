@@ -1,23 +1,27 @@
 const newFormHandler = async (event) => {
   event.preventDefault();
 
-  const name = document.querySelector('#project-name').value.trim();
-  const needed_funding = document
+  const quiz_name = document.querySelector('#project-name').value.trim();
+  const question_length = document
     .querySelector('#project-funding')
     .value.trim();
-  const description = document.querySelector('#project-desc').value.trim();
+  // const description = document.querySelector('#project-desc').value.trim();
 
-  if (name && needed_funding && description) {
-    const response = await fetch(`/api/quiz/`, {
+  console.log(quiz_name, question_length);
+  console.log(JSON.stringify({ quiz_name, question_length }));
+
+  if (quiz_name && question_length) {
+    const response = await fetch(`/api/quiz`, {
       method: 'POST',
-      body: JSON.stringify({ name, description }),
+      body: JSON.stringify({ quiz_name, question_length }),
       headers: {
         'Content-Type': 'application/json',
       },
     });
 
     if (response.ok) {
-      document.location.replace('/profile');
+      const quiz = await response.json();
+      document.location.replace(`/quizmaker/${quiz.id}`);
     } else {
       alert('Failed to create project');
     }
@@ -44,6 +48,6 @@ document
   .querySelector('.new-project-form')
   .addEventListener('submit', newFormHandler);
 
-document
-  .querySelector('.project-list')
-  .addEventListener('click', delButtonHandler);
+// document
+//   .querySelector('.project-list')
+//   .addEventListener('click', delButtonHandler);

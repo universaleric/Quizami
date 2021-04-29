@@ -20,7 +20,7 @@ const questionData = [
     correct_response: '2',
   },
   {
-    quiz_id: [1],
+    quiz_id: '',
   },
 ];
 
