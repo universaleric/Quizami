@@ -1,37 +1,51 @@
-        <header>
-            <button class="hss"><p class ="score">Highscores</p></button>
-            <button class="time"><p class="timer">Seconds</p></button>
-            <button class="hss"><p class ="score">Quiz: {{quiz.name}}</p></button>
-        </header>
+<header>
+    <button class="hss">
+        <p class="score">Highscores</p>
+    </button>
+    <button class="time">
+        <p class="timer">Seconds</p>
+    </button>
+    <button class="hss">
+        <p class="score">Quiz: {{quiz.name}}</p>
+    </button>
+</header>
 
-        <button class="startBtn">
-            <p>Start</p>
+<button class="startBtn">
+    <p>Start</p>
+</button>
+
+<div class="questContain">
+    <h2 class="questionPrompt">Question Text</h2>
+    <div class="answerBtnCon">
+        <button class="answerBtn" id="answerchoicea">
+            <p>Answer A</p>
         </button>
+        <button class="answerBtn" id="answerchoiceb">
+            <p>Answer B</p>
+        </button>
+        <button class="answerBtn" id="answerchoicec">
+            <p>Answer C</p>
+        </button>
+        <button class="answerBtn" id="answerchoiced">
+            <p>Answer D</p>
+        </button>
+    </div>
+</div>
 
-        <div class="questContain">
-            <h2 class="questionPrompt">Question Text</h2>
-            <div class="answerBtnCon">
-                <button class="answerBtn" id="answerchoicea"><p>Answer A</p></button>
-                <button class="answerBtn" id="answerchoiceb"><p>Answer B</p></button>
-                <button class="answerBtn" id="answerchoicec"><p>Answer C</p></button>
-                <button class="answerBtn" id="answerchoiced"><p>Answer D</p></button>
-          </div>
-        </div>
 
+<div class="endScreen">
+    <h2 class="finalScore"></h2>
+    <div class="HSCon">
+        <p>Highscores:</p>
+        <ol id="highscorelist"></ol>
+        <form id="highscorelog" method="POST">
+            <label for="highscoreinitial-text">Add your score: </label>
+            <input type="text" placeholder="Initials" name="userinitials" id="initialsText" />
+            <button class="saveHighScores">Save</button>
+            <button class="clearHighScores">Clear</button>
+            <button class="playAgain">Play Again</button>
+        </form>
+    </div>
+</div>
 
-        <div class="endScreen">
-            <h2 class="finalScore"></h2>
-            <div class="HSCon">
-                <p>Highscores:</p>
-                <ol id="highscorelist"></ol>
-                <form id="highscorelog" method="POST">
-                    <label for="highscoreinitial-text">Add your score: </label>
-                    <input type="text" placeholder="Initials" name="userinitials" id="initialsText"/>
-                    <button class="saveHighScores">Save</button>
-                    <button class="clearHighScores">Clear</button>
-                    <button class="playAgain">Play Again</button>
-                </form> 
-            </div>
-        </div>
-
-<script src="../public/js/quiztaker.js"></script>
+<script src="/js/quiztaker.js"></script>

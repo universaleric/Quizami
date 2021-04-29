@@ -6,19 +6,19 @@ router.get('/', async (req, res) => {
   try {
     // Get all quizzes and JOIN with user data
     const quizData = await Quiz.findAll({
-      include: [
-        {
-          model: User,
-          attributes: ['username'],
-        },
-      ],
+      // include: [
+      //   {
+      //     model: User,
+      //     attributes: ['username'],
+      //   },
+      // ],
     });
 
     // Serialize data so the template can read it
     const quizzes = quizData.map((quiz) => quiz.get({ plain: true }));
 
     // Pass serialized data and session flag into template
-    res.render('/homepage', {
+    res.render('homepage', {
       quizzes,
       user_id: req.session.user_id,
       logged_in: req.session.logged_in,
@@ -41,7 +41,7 @@ router.get('/quiz/:id', async (req, res) => {
     const quiz = quizData.get({ plain: true });
     console.log(quiz);
 
-    res.render('project', {
+    res.render('quizPage', {
       ...quiz,
       logged_in: req.session.logged_in,
     });
@@ -65,6 +65,29 @@ router.get('/quizmaker/:id', async (req, res) => {
 
     res.render('quizmaker', {
       ...quiz,
+      logged_in: req.session.logged_in,
+      user_id: req.session.user_id,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get('/quiztaker/:id', async (req, res) => {
+  try {
+    const questionData = await Question.findAll({
+      // include: [
+      //   {
+      //     model: User,
+      //   },
+      // ],
+    });
+
+    const questions = questionData.get({ plain: true });
+    console.log(questions);
+
+    res.render('quiztaker', {
+      // ...questions,
       logged_in: req.session.logged_in,
       user_id: req.session.user_id,
     });
