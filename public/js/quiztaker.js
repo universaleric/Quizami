@@ -8,7 +8,7 @@ let mainEl = document.querySelector(".main");
 let finalScoreEl = document.querySelector(".finalScore")
 let endScreenEl = document.querySelector(".endScreen")
 let questContainEl = document.querySelector(".questContain")
-let questEl = document.querySelector(".question")
+let questEl = document.querySelector(".questionPrompt")
 
 let answerBtnsEl = document.getElementsByClassName("answerBtn")
 let answerBtnAEl = document.querySelector("#answerchoicea")
@@ -17,87 +17,78 @@ let answerBtnCEl = document.querySelector("#answerchoicec")
 let answerBtnDEl = document.querySelector("#answerchoiced")
 
 let secondsLeft = 1;
+let secondsPassed;
 let score = 0;
 let currentQuest = 0;
 
-// const questionsData = require('../../mockup/mockQseed.json');
+let questions;
 
-
-
-// await fetch("../../mockup/mockQseed.json")
-//   .then(questionJSON => questionJSON.json())
-//   .then(questionData => questions = questionData);
-//   .then(questionData => questQuest(questionData));
-//   .then(questionData => console.log(questionData));
-
-questQuest()
+questQuest();
+let scoreset = []
 
 async function questQuest () {
 
-    await fetch("../../mockup/mockQseed.json")
-    .then(questionJSON => questionJSON.json())
-    .then(questionData => questi = questionData);
+  await fetch("../../mockup/mockQseed.json")
+  .then(questionJSON => questionJSON.json())
+  .then(questionData => questions = questionData);
 
-    console.log(questi)
-    
-    return questions = questi
+    // console.log(questions)    
 }
 
 // console.log(questionsData)
 
-
-let questions = [
+// let questions = [
   
-  {
-    question: "What's my favorite color?", 
-    answers:[
-      { text: "Green", correct: false},
-      { text: "Blue", correct: false},
-      { text: "Red", correct: true},
-      { text: "Black", correct: false},
-    ]},
-  {
-    question: "What's my favorite band?", 
-    answers:[
-      { text: "Vampire Weekend", correct: true},
-      { text: "The Strokes", correct: false},
-      { text: "Glass Animals", correct: false},
-      { text: "Bombay Bicyle Club", correct: false},
-    ]},
-  {
-    question: "What is my birthday? 🤨", 
-    answers:[
-      { text: "August 20", correct: false},
-      { text: "August 21", correct: true},
-      { text: "August 22", correct: false},
-      { text: "August 24", correct: false},
-    ]},
-  {
-    question: "What's my favorite food?", 
-    answers:[
-      { text: "Gyros", correct: false},
-      { text: "Pizza", correct: false},
-      { text: "Tacos", correct: true},
-      { text: "Sushi", correct: false},
-    ]},
-  {
-    question: "What's my dream vacation?", 
-    answers:[
-      { text: "Athens", correct: false},
-      { text: "Iceland", correct: false},
-      { text: "Tokyo", correct: true},
-      { text: "Fiji", correct: false},
-    ]},
-  {
-    question: "Which TV Show would I pick if I could only watch one for the rest of my life?", 
-    answers:[
-      { text: "Midnight Gospel", correct: false},
-      { text: "Game Of Thrones", correct: false},
-      { text: "Parks and Rec", correct: true},
-      { text: "The Office", correct: false},
-    ]},
+//   {
+//     question: "What's my favorite color?", 
+//     answers:[
+//       { text: "Green", correct: false},
+//       { text: "Blue", correct: false},
+//       { text: "Red", correct: true},
+//       { text: "Black", correct: false},
+//     ]},
+//   {
+//     question: "What's my favorite band?", 
+//     answers:[
+//       { text: "Vampire Weekend", correct: true},
+//       { text: "The Strokes", correct: false},
+//       { text: "Glass Animals", correct: false},
+//       { text: "Bombay Bicyle Club", correct: false},
+//     ]},
+//   {
+//     question: "What is my birthday? 🤨", 
+//     answers:[
+//       { text: "August 20", correct: false},
+//       { text: "August 21", correct: true},
+//       { text: "August 22", correct: false},
+//       { text: "August 24", correct: false},
+//     ]},
+//   {
+//     question: "What's my favorite food?", 
+//     answers:[
+//       { text: "Gyros", correct: false},
+//       { text: "Pizza", correct: false},
+//       { text: "Tacos", correct: true},
+//       { text: "Sushi", correct: false},
+//     ]},
+//   {
+//     question: "What's my dream vacation?", 
+//     answers:[
+//       { text: "Athens", correct: false},
+//       { text: "Iceland", correct: false},
+//       { text: "Tokyo", correct: true},
+//       { text: "Fiji", correct: false},
+//     ]},
+//   {
+//     question: "Which TV Show would I pick if I could only watch one for the rest of my life?", 
+//     answers:[
+//       { text: "Midnight Gospel", correct: false},
+//       { text: "Game Of Thrones", correct: false},
+//       { text: "Parks and Rec", correct: true},
+//       { text: "The Office", correct: false},
+//     ]},
   
-]
+// ]
 
 
 console.log(questions)
@@ -168,7 +159,9 @@ function checkValidity(chose){
   let chosenA = chose.target;
   if (chosenA.classList.contains("correct")){
     score++;
+    console.log(score)
   } else {   
+    console.log(score)
     secondsLeft = secondsLeft + 10;
   };
 
@@ -177,7 +170,7 @@ function checkValidity(chose){
   if (currentQuest < questions.length){
     renderQuestions();
   } else{
-    secondsLeft = 0;
+    secondsPassed = secondsLeft ;
     endGame();
   }
   
@@ -202,11 +195,41 @@ function resetQA() {
 
 
   
-function endGame() {
+async function endGame() {
   questContainEl.setAttribute("style", "display: none")
   endScreenEl.setAttribute("style", "display: flex")
+  timeBtnEl.setAttribute("style", "display: hidden")
 
-  finalScoreEl.textContent = "Final score: " + score;
+  let time = secondsPassed
+  //This must be changed to a req.session.user_id within score routes POST route.
+  let user_id = 1
+  // let quiz_id = parseInt(document.location.pathname.split('/')[document.location.pathname.split('/').length-1])
+  let quiz_id = 1
+
+  finalScoreEl.textContent = "Final score: " + score + "\n Time:" + secondsPassed + "\n User name" + "\n Quiz name";
+
+  scoreset.push({quiz_id, user_id, score, time})
+
+  console.log(scoreset)
+  console.log(JSON.stringify(scoreset))
+
+  if (scoreset) {
+    const response = await fetch(`/api/score/`, {
+      method: 'POST',
+      // body: JSON.stringify({quiz_id, user_id, score, time),
+      body: JSON.stringify(scoreset),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (response.ok) {
+      // document.location.replace('/profile');
+      console.log(question)
+    } else {
+      alert('Failed to create score data');
+    }
+  }
 }
 
 HighSBtnEl.addEventListener("click", function(event) {
