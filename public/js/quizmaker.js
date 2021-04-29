@@ -21,7 +21,7 @@ let correctRInputEl = document.querySelector("#correctR")
 
 startBtnEl.addEventListener("click", function(){
   removeStartBtn();
-  timeBtnEl.setAttribute("style", "display: flex")
+  // timeBtnEl.setAttribute("style", "display: flex")
   startGame();
 });
 
@@ -103,8 +103,8 @@ function removeStartBtn() {
 function endGame() {
   questContainEl.setAttribute("style", "display: none")
   endScreenEl.setAttribute("style", "display: flex")
+  renderHighScores();
 
-  finalScoreEl.textContent = "Final score: " + score;
 }
 
 HighSBtnEl.addEventListener("click", function(event) {
@@ -129,6 +129,25 @@ function renderHighScores() {
 
   for (var i = 0; i < workingQuestions.length; i++) {
     var questionDraft = workingQuestions[i];
+    let numberedAnswer = questionDraft.correct_response
+    let answerString;
+
+    if (numberedAnswer = 1){
+      answerString = questionDraft.response_1.toString()
+
+    } else if (numberedAnswer = 1){
+      answerString = questionDraft.response_1.toString() 
+        
+    } else if (numberedAnswer = 1){
+      answerString = questionDraft.response_1.toString() 
+       
+    } else if (numberedAnswer = 4){
+      answerString = questionDraft.response_1.toString() 
+    } else {
+      answerString = 'You did not select a correct answer!'
+    }
+
+    
 
     var li = document.createElement("li");
     li.textContent = questionDraft.question + " --- " + questionDraft.correct_response;
@@ -143,6 +162,7 @@ finishQuizBtnEl.addEventListener("click",  async function (event) {
   console.log(JSON.stringify(workingQuestions))
   //  localStorage.setItem("highscores", JSON.stringify(highscores));
 
+  endGame();
   // if (question && response_1 && response_2 && response_3 && response_4 && correct_response && quiz_id) {
   if (workingQuestions) {
     const response = await fetch(`/api/question/`, {
@@ -188,16 +208,12 @@ saveQuestBtnEl.addEventListener("click", function(event) {
   console.log(numberedQuestions)
 
   for (let i = 0; i < workingQbtns.length; i++) {
-    
     // questCreatedSetEl.append(workingQbtns[i])
     // document.getElementById("qcSet").appendChild(workingQbtns[i]);
     document.getElementById('qcSet').innerHTML += workingQbtns[i];
-
-
   }
 
- }
-)
+})
 
 
 
