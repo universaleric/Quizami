@@ -89,6 +89,10 @@ li {
   font-style: italic;
 }
 
+.c-box {
+  color: #1b89bc;
+}
+
 .question {
   padding: 15px;
   font-size: 1.5em;
@@ -222,4 +226,10 @@ header button:focus {
 
   width: 45%;
 
+}
+
+#user_idNumber, #user_nameText {
+  visibility: hidden;
+  font-size: 1px;
+  margin: 0;
 }

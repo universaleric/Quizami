@@ -10,10 +10,10 @@
     <p>
       <span for="img" aria-label="money">⏱</span>
       <!-- Pass needed_funding value to the helper function -->
-      <span class="dollar-amount">{{ quiz.needed_funding}}</span>
-      minutes needed to complete this quiz!
+      <span class="dollar-amount">{{quiz.question_length}}</span>
+      questions long!
     </p>
-    <p>Created by {{quiz.user_id}} on 4/21/1454</p>
+    <p>Created by {{user.username}} on {{format_date quiz.date_created}}</p>
   </div>
   <div class="col-md-7">
     {{!-- <p>

@@ -1,9 +1,9 @@
-const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../config/connection');
+const { Model, DataTypes } = require("sequelize");
+const sequelize = require("../config/connection");
 
-class Quiz extends Model {}
+class Comment extends Model {}
 
-Quiz.init(
+Comment.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -11,24 +11,30 @@ Quiz.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    quiz_name: {
-      type: DataTypes.STRING,
-      allowNull: false,
+    description: {
+      type: DataTypes.STRING(1234),
     },
     date_created: {
       type: DataTypes.DATE,
       allowNull: false,
       defaultValue: DataTypes.NOW,
     },
+    quiz_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: "quiz",
+        key: "id",
+      },
+    },
     user_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'user',
-        key: 'id',
+        model: "user",
+        key: "id",
       },
     },
-    question_length: {
-      type: DataTypes.INTEGER,
+    user_name: {
+      type: DataTypes.STRING,
     },
   },
   {
@@ -36,8 +42,8 @@ Quiz.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'quiz', // double check proper model name
+    modelName: "comment",
   }
 );
 
-module.exports = Quiz;
+module.exports = Comment;

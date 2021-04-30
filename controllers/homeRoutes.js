@@ -1,17 +1,17 @@
 const router = require('express').Router();
-const { User, Quiz, Question, Score } = require('../models');
+const { User, Quiz, Question, Score, Comment } = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
   try {
     // Get all quizzes and JOIN with user data
     const quizData = await Quiz.findAll({
-      // include: [
-      //   {
-      //     model: User,
-      //     attributes: ['username'],
-      //   },
-      // ],
+      include: [
+        {
+            model: User,
+            attributes: ['first_name', 'last_name', 'username'],
+        },
+      ],
     });
 
     // Serialize data so the template can read it
@@ -21,6 +21,7 @@ router.get('/', async (req, res) => {
     res.render('homepage', {
       quizzes,
       user_id: req.session.user_id,
+      user_name: req.session.use_name,
       logged_in: req.session.logged_in,
     });
   } catch (err) {
@@ -31,19 +32,27 @@ router.get('/', async (req, res) => {
 router.get('/quiz/:id', async (req, res) => {
   try {
     const quizData = await Quiz.findByPk(req.params.id, {
-      //   include: [
-      //     {
-      //       model: User,
-      //     },
-      //   ],
+        include: [
+          {
+            model: User,
+            attributes: ['first_name', 'last_name', 'username'],
+          },
+          {
+            model: Comment,
+            attributes: ['description', 'date_created', 'quiz_id', 'user_id', 'user_name', 'id'],
+          },
+        ],
     });
 
     const quiz = quizData.get({ plain: true });
+    let authorcheck = Boolean(quiz.user_id === req.session.user_id)
+
     console.log(quiz);
 
     res.render('quizPage', {
       ...quiz,
       logged_in: req.session.logged_in,
+      author: authorcheck,
     });
   } catch (err) {
     res.status(500).json(err);
@@ -76,21 +85,54 @@ router.get('/quizmaker/:id', async (req, res) => {
 router.get('/quiztaker/:id', async (req, res) => {
   try {
     const questionData = await Question.findAll({
-      // include: [
-      //   {
-      //     model: User,
-      //   },
-      // ],
+      include: [
+        {
+          model: Quiz,
+          attributes: ['quiz_name'],
+        },
+      ],
+      
+      where: {
+        quiz_id: req.params.id
+      }
     });
 
-    const questions = questionData.get({ plain: true });
+    console.log(questionData);
+    // const questions = quizData.get({ plain: true });
+    const questions = questionData.map((question) => question.get({ plain: true }));
+
     console.log(questions);
+  
 
     res.render('quiztaker', {
-      // ...questions,
+      ...questions,
       logged_in: req.session.logged_in,
       user_id: req.session.user_id,
+      username: req.session.use_name,
     });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get('/api/quiztaker/:id', async (req, res) => {
+  try {
+    const questionData = await Question.findAll({
+      
+      where: {
+        quiz_id: req.params.id
+      }
+    });
+
+    console.log(questionData);
+    // const questions = quizData.get({ plain: true });
+    const questions = questionData.map((question) => question.get({ plain: true }));
+
+    console.log(questions);
+  
+
+    res.json(questions);
+
   } catch (err) {
     res.status(500).json(err);
   }

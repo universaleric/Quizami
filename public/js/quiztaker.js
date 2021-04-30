@@ -15,23 +15,30 @@ let answerBtnAEl = document.querySelector('#answerchoicea');
 let answerBtnBEl = document.querySelector('#answerchoiceb');
 let answerBtnCEl = document.querySelector('#answerchoicec');
 let answerBtnDEl = document.querySelector('#answerchoiced');
+let user_idEl = document.querySelector('#user_idNumber');
+let usernameEl = document.querySelector('#user_nameText');
+
+let username = usernameEl.innerHTML
+let user_id = parseInt(user_idEl.innerHTML);
+let quiz_id = parseInt(document.location.pathname.split('/')[document.location.pathname.split('/').length-1]);
+
 
 let secondsLeft = 1;
 let secondsPassed;
 let score = 0;
 let currentQuest = 0;
 
-let questions;
-
-questQuest();
 let scoreset = [];
 
+let questions;
+questQuest();
+
 async function questQuest() {
-  await fetch('/')
+  await fetch(`/api/quiztaker/${quiz_id}`)
     .then((questionJSON) => questionJSON.json())
     .then((questionData) => (questions = questionData));
 
-  // console.log(questions)
+  console.log(questions)
 }
 
 // console.log(questionsData)
@@ -133,18 +140,21 @@ function removeStartBtn() {
 
 function renderQuestions() {
   questEl.textContent = questions[currentQuest].question;
-  answerBtnAEl.textContent = questions[currentQuest].answers[0].text;
-  answerBtnBEl.textContent = questions[currentQuest].answers[1].text;
-  answerBtnCEl.textContent = questions[currentQuest].answers[2].text;
-  answerBtnDEl.textContent = questions[currentQuest].answers[3].text;
+  answerBtnAEl.textContent = questions[currentQuest].response_1;
+  answerBtnBEl.textContent = questions[currentQuest].response_2;
+  answerBtnCEl.textContent = questions[currentQuest].response_3;
+  answerBtnDEl.textContent = questions[currentQuest].response_4;
 
-  if (secondsLeft <= 0) {
+  if (secondsLeft < 0) {
     endGame();
   } else {
   }
   for (let i = 0; i < answerBtnsEl.length; i++) {
-    let ac = questions[currentQuest].answers[i].correct;
-    if (ac === true) {
+    
+    let crespNumb = questions[currentQuest].correct_response;
+    let crespIndex = crespNumb - 1
+    
+    if (i === crespIndex) {
       answerBtnsEl[i].classList.add('correct');
     }
   }
@@ -197,18 +207,15 @@ async function endGame() {
   timeBtnEl.setAttribute('style', 'display: hidden');
 
   let time = secondsPassed;
-  //This must be changed to a req.session.user_id within score routes POST route.
-  let user_id = 1;
-  // let quiz_id = parseInt(document.location.pathname.split('/')[document.location.pathname.split('/').length-1])
-  let quiz_id = 1;
+  
 
   finalScoreEl.textContent =
     'Final score: ' +
     score +
-    '\n Time:' +
+    '\n | \n Time: ' +
     secondsPassed +
-    '\n User name' +
-    '\n Quiz name';
+    '\n | \n Username: ' + username +
+    '\n | \n Quiz name: ';
 
   scoreset.push({ quiz_id, user_id, score, time });
 
@@ -218,8 +225,8 @@ async function endGame() {
   if (scoreset) {
     const response = await fetch(`/api/score/`, {
       method: 'POST',
-      // body: JSON.stringify({quiz_id, user_id, score, time),
-      body: JSON.stringify(scoreset),
+      body: JSON.stringify({quiz_id, user_id, score, time}),
+      // body: JSON.stringify(scoreset),
       headers: {
         'Content-Type': 'application/json',
       },
@@ -227,7 +234,8 @@ async function endGame() {
 
     if (response.ok) {
       // document.location.replace('/profile');
-      console.log(question);
+      console.log("Score added")
+
     } else {
       alert('Failed to create score data');
     }
