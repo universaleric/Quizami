@@ -89,6 +89,10 @@ li {
   font-style: italic;
 }
 
+.c-box {
+  color: #1b89bc;
+}
+
 .question {
   padding: 15px;
   font-size: 1.5em;

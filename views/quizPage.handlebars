@@ -1,16 +1,92 @@
 <div class="text-center">
-  <h2>{{quiz_name}}</h2>
-  <p>{{{get_emoji}}}</p>
-  {{!-- <p>{{description}}</p> --}}
-  <p>Created by {{user.username}} on 4/10/1992</p>
-  <p>
-    <span for="img" aria-label="money">⁉️ </span>
-    <span class="dollar-amount">{{question_length}}</span>
-    questions long
-  </p>
-  <p>
-    <button id="quiztaker" class="btn btn-primary">Take this Quiz!</button>
-  </p>
+
+  <div class="row">
+  
+    <div class="col-md-8">
+
+      <h2>{{quiz_name}}</h2>
+      <p>{{{get_emoji}}}</p>
+      {{!-- <p>{{description}}</p> --}}
+      <p>Created by {{user.username}} on 4/10/1992</p>
+      <p>
+        <span for="img" aria-label="money">⁉️ </span>
+        <span class="dollar-amount">{{question_length}}</span>
+        questions long
+      </p>
+      <p>
+        <button id="quiztaker" class="btn btn-primary">Take this Quiz!</button>
+      </p>
+      {{!-- {{#if author}}
+      <button type="submit" class="btn btn-primary updater">Update</button>
+      {{/if}} --}}
+    </div>
+    <div class="col-md-4">
+      <form class="form new-comment-form">
+        <div class="form-group">
+          <label for="comment-desc">comment:</label>
+          <textarea class="form-input" id="comment-desc" name="comment-desc"></textarea>
+        </div>
+        <div class="form-group">
+         <button type="submit" class="btn btn-primary">submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+  {{!-- <div class="updateform display-none col-md-8">
+    <h3>Update Quiz Name:</h3>
+    <form class="form update-project-form">
+      <div class="form-group">
+        <label for="update-name">Quiz Title:</label>
+        <input class="form-input" type="text" id="update-name" name="update-name" />
+      </div>
+      <div class="form-group">
+        <label for="update-desc">Question length:</label>
+        <textarea class="form-input" id="update-desc" name="update-desc"></textarea>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Update</button>
+      </div>
+    </form>
+  </div> --}}
+
+
 </div>
+
+{{#if comments.length}}
+  <div class="col-md-12 mt-4 comment-list c-box">
+    <h3 class="text-center">Comments</h3>
+
+    {{#each comments as |comment|}}
+    <div class="row mb-2">
+      
+      <div class="col-md-9 text-left">
+        <p>
+          {{comment.description}}
+        </p>
+      </div>
+
+      <div class="col-md-2">
+        <p>{{comment.user_name}} on {{format_date comment.date_created}}</p>
+      </div>
+            
+      {{#if author}}
+      <div class="col-md-1">
+        <button class="btn btn-sm btn-danger" data-id="{{comment.id}}">DELETE</button>
+      </div>
+      {{/if}}
+  
+    </div>
+    {{/each}}
+  </div>
+{{/if}}
+
+
+
+
+
+
+
 
 <script src="/js/quizPage.js"></script>

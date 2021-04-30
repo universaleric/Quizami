@@ -16,7 +16,9 @@ let answerBtnBEl = document.querySelector('#answerchoiceb');
 let answerBtnCEl = document.querySelector('#answerchoicec');
 let answerBtnDEl = document.querySelector('#answerchoiced');
 let user_idEl = document.querySelector('#user_idNumber');
+let usernameEl = document.querySelector('#user_nameText');
 
+let username = usernameEl.innerHTML
 let user_id = parseInt(user_idEl.innerHTML);
 let quiz_id = parseInt(document.location.pathname.split('/')[document.location.pathname.split('/').length-1]);
 
@@ -210,10 +212,10 @@ async function endGame() {
   finalScoreEl.textContent =
     'Final score: ' +
     score +
-    '\n Time:' +
+    '\n | \n Time: ' +
     secondsPassed +
-    '\n User name' +
-    '\n Quiz name';
+    '\n | \n Username: ' + username +
+    '\n | \n Quiz name: ';
 
   scoreset.push({ quiz_id, user_id, score, time });
 
