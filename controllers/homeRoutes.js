@@ -87,12 +87,36 @@ router.get('/quiztaker/:id', async (req, res) => {
     const questions = questionData.map((question) => question.get({ plain: true }));
 
     console.log(questions);
-    
+  
+
     res.render('quiztaker', {
       ...questions,
       logged_in: req.session.logged_in,
       user_id: req.session.user_id,
     });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get('/api/quiztaker/:id', async (req, res) => {
+  try {
+    const questionData = await Question.findAll({
+      
+      where: {
+        quiz_id: req.params.id
+      }
+    });
+
+    console.log(questionData);
+    // const questions = quizData.get({ plain: true });
+    const questions = questionData.map((question) => question.get({ plain: true }));
+
+    console.log(questions);
+  
+
+    res.json(questions);
+
   } catch (err) {
     res.status(500).json(err);
   }
