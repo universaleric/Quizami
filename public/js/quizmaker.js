@@ -20,7 +20,6 @@ let correctRInputEl = document.querySelector('#correctR');
 
 startBtnEl.addEventListener('click', function () {
   removeStartBtn();
-  // timeBtnEl.setAttribute("style", "display: flex")
   startGame();
 });
 
@@ -31,71 +30,8 @@ function startGame() {
 
 function removeStartBtn() {
   startBtnEl.setAttribute('style', 'display:none');
-  //   instructEl.setAttribute("style", "display:none")
 }
 
-// function renderQuestions(){
-
-//   questEl.textContent = questions[currentQuest].question
-//   answerBtnAEl.textContent = questions[currentQuest].answers[0].text
-//   answerBtnBEl.textContent = questions[currentQuest].answers[1].text
-//   answerBtnCEl.textContent = questions[currentQuest].answers[2].text
-//   answerBtnDEl.textContent = questions[currentQuest].answers[3].text
-
-//   if ((secondsLeft<= 0)) {
-//     endGame();
-//   } else {
-//   }
-//   for (let i = 0; i < answerBtnsEl.length; i++) {
-
-//     let ac = questions[currentQuest].answers[i].correct;
-//     if(ac === true){
-//       answerBtnsEl[i].classList.add("correct")
-//     }
-//   }
-
-//   answerBtnAEl.addEventListener("click", checkValidity)
-//   answerBtnBEl.addEventListener("click", checkValidity)
-//   answerBtnCEl.addEventListener("click", checkValidity)
-//   answerBtnDEl.addEventListener("click", checkValidity)
-// };
-
-// function checkValidity(chose){
-
-//   let chosenA = chose.target;
-//   if (chosenA.classList.contains("correct")){
-//     score++;
-//   } else {
-//     secondsLeft = secondsLeft + 10;
-//   };
-
-//   resetQA();
-//   currentQuest++;
-//   if (currentQuest < questions.length){
-//     renderQuestions();
-//   } else{
-//     secondsLeft = 0;
-//     endGame();
-//   }
-
-// };
-
-// function resetQA() {
-
-//   if(answerBtnAEl.classList.contains("correct")){
-//     answerBtnAEl.classList.remove("correct")
-//   }
-//   if(answerBtnBEl.classList.contains("correct")){
-//     answerBtnBEl.classList.remove("correct")
-//   }
-//   if(answerBtnCEl.classList.contains("correct")){
-//     answerBtnCEl.classList.remove("correct")
-//   }
-//   if (answerBtnDEl.classList.contains("correct")){
-//     answerBtnDEl.classList.remove("correct")
-//   }
-//   return
-// }
 
 function endGame() {
   questContainEl.setAttribute('style', 'display: none');
@@ -109,10 +45,8 @@ HighSBtnEl.addEventListener('click', function (event) {
   endGame();
 });
 
-let userInput = document.querySelector('#initialsText');
 let highscorelog = document.querySelector('#highscorelog');
 let draftList = document.querySelector('#draftlist');
-let clearHSBtnEl = document.querySelector('.clearHighScores');
 let saveQuestBtnEl = document.querySelector('.saveQuest');
 let finishQuizBtnEl = document.querySelector('.finishQuiz');
 let playAgainBtnEl = document.querySelector('.playAgain');
@@ -142,7 +76,7 @@ function renderHighScores() {
 
     var li = document.createElement('li');
     li.textContent =
-      questionDraft.question + ' --- ' + questionDraft.correct_response;
+      questionDraft.question;
     draftList.appendChild(li);
   }
 }
@@ -152,10 +86,8 @@ finishQuizBtnEl.addEventListener('click', async function (event) {
 
   console.log(workingQuestions);
   console.log(JSON.stringify(workingQuestions));
-  //  localStorage.setItem("highscores", JSON.stringify(highscores));
 
   endGame();
-  // if (question && response_1 && response_2 && response_3 && response_4 && correct_response && quiz_id) {
   if (workingQuestions) {
     const response = await fetch(`/api/question/`, {
       method: 'POST',
@@ -167,7 +99,6 @@ finishQuizBtnEl.addEventListener('click', async function (event) {
     });
 
     if (response.ok) {
-      // document.location.replace('/profile');
       console.log(response.json());
     } else {
       alert('Failed to create project');
@@ -225,39 +156,30 @@ saveQuestBtnEl.addEventListener('click', function (event) {
   console.log(numberedQuestions);
 
   for (let i = 0; i < workingQbtns.length; i++) {
-    // questCreatedSetEl.append(workingQbtns[i])
-    // document.getElementById("qcSet").appendChild(workingQbtns[i]);
     document.getElementById('qcSet').innerHTML += workingQbtns[i];
   }
+
+  [...document.getElementsByClassName('qcFields')].forEach(el => el.value='')
 });
 
-clearHSBtnEl.addEventListener('click', function (event) {
-  event.preventDefault();
-  highscores = [];
-
-  renderHighScores();
-});
-
-playAgainBtnEl.addEventListener('click', function (event) {
+const quizPagehandler = function (event) {
   event.preventDefault();
 
-  storeHighscores();
   secondsLeft = 1;
   currentQuest = 0;
   score = 0;
   endScreenEl.setAttribute('style', 'display: none');
-  timeBtnEl.setAttribute('style', 'display: none');
-  startBtnEl.setAttribute('style', 'display:flex');
-});
+  
+  const qid = parseInt(
+    document.location.pathname.split('/')[
+      document.location.pathname.split('/').length - 1
+    ]
+  );
 
-function init() {
-  let storedHighscores = JSON.parse(localStorage.getItem('highscores'));
+  document.location.replace(`/quiz/${qid}`);
+};
 
-  if (storedHighscores !== null) {
-    highscores = storedHighscores;
-  }
 
-  renderHighScores();
-}
-
-init();
+document
+.querySelector('.playAgain')
+.addEventListener('click', quizPagehandler);

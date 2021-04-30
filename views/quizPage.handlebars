@@ -6,8 +6,7 @@
 
       <h2>{{quiz_name}}</h2>
       <p>{{{get_emoji}}}</p>
-      {{!-- <p>{{description}}</p> --}}
-      <p>Created by {{user.username}} on 4/10/1992</p>
+      <p>Created by {{user.username}} on {{quiz.date_created}}</p>
       <p>
         <span for="img" aria-label="money">⁉️ </span>
         <span class="dollar-amount">{{question_length}}</span>

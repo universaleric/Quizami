@@ -251,73 +251,28 @@ HighSBtnEl.addEventListener('click', function (event) {
 
 let userInput = document.querySelector('#initialsText');
 let highscorelog = document.querySelector('#highscorelog');
-let highscoreList = document.querySelector('#highscorelist');
-let clearHSBtnEl = document.querySelector('.clearHighScores');
-let saveHSBtnEl = document.querySelector('.saveHighScores');
 let playAgainBtnEl = document.querySelector('.playAgain');
 
 let highscores = [];
 
-function renderHighScores() {
-  highscoreList.innerHTML = '';
-
-  for (var i = 0; i < highscores.length; i++) {
-    var highscore = highscores[i];
-
-    var li = document.createElement('li');
-    li.textContent = highscore.userText + ' --- ' + highscore.userScore;
-    highscoreList.appendChild(li);
-  }
-}
-
-function storeHighscores() {
-  localStorage.setItem('highscores', JSON.stringify(highscores));
-}
-
-saveHSBtnEl.addEventListener('click', function (event) {
+const quizPagehandler = function (event) {
   event.preventDefault();
 
-  let userText = userInput.value.trim();
-  let userScore = score;
-
-  if (userText === '') {
-    return;
-  }
-
-  highscores.push({ userText, userScore });
-  userInput.value = '';
-
-  storeHighscores();
-  renderHighScores();
-});
-
-clearHSBtnEl.addEventListener('click', function (event) {
-  event.preventDefault();
-  highscores = [];
-
-  renderHighScores();
-});
-
-playAgainBtnEl.addEventListener('click', function (event) {
-  event.preventDefault();
-
-  storeHighscores();
   secondsLeft = 1;
   currentQuest = 0;
   score = 0;
   endScreenEl.setAttribute('style', 'display: none');
-  timeBtnEl.setAttribute('style', 'display: none');
-  startBtnEl.setAttribute('style', 'display:flex');
-});
 
-function init() {
-  let storedHighscores = JSON.parse(localStorage.getItem('highscores'));
+  const qid = parseInt(
+    document.location.pathname.split('/')[
+      document.location.pathname.split('/').length - 1
+    ]
+  );
 
-  if (storedHighscores !== null) {
-    highscores = storedHighscores;
-  }
+  document.location.replace(`/quiz/${qid}`);
+};
 
-  renderHighScores();
-}
+document
+.querySelector('.playAgain')
+.addEventListener('click', quizPagehandler);
 
-init();

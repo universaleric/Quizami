@@ -18,11 +18,8 @@
 </button>
 
 <div class="questContain">
-    <!-- <h2 class="question">Question text</h2> -->
-    <!-- <label for="answerchoicea">Question to ask:</label> -->
-
-
-    <input class="question" placeholder="Write your question..." aria-placeholder="Write question...."
+   
+    <input class="question qcFields" placeholder="Write your question..." aria-placeholder="Write question...."
         id="writtenQuest"></input>
 
 
@@ -30,19 +27,19 @@
         <label for="answerchoicea">
             <p>Answer Choice A</p>:
         </label>
-        <input class="answerBtn" id="answerchoicea"></input>
+        <input class="answerBtn qcFields" id="answerchoicea"></input>
         <label for="answerchoiceb">
             <p>Answer Choice B</p>:
         </label>
-        <input class="answerBtn" id="answerchoiceb"></input>
+        <input class="answerBtn qcFields" id="answerchoiceb"></input>
         <label for="answerchoicec">
             <p>Answer Choice C</p>:
         </label>
-        <input class="answerBtn" id="answerchoicec"></input>
+        <input class="answerBtn qcFields" id="answerchoicec"></input>
         <label for="answerchoiced">
             <p>Answer Choice D</p>:
         </label>
-        <input class="answerBtn" id="answerchoiced"></input>
+        <input class="answerBtn qcFields" id="answerchoiced"></input>
         <label for="correctR">Choose the correct answer:</label>
         <select id="correctR" name="correctR">
             <option value="">--Select--</option>
@@ -64,13 +61,9 @@
     <div class="HSCon">
         <p>Questions Added:</p>
         <ol id="draftlist"></ol>
-        <form id="highscorelog" method="POST">
-            <label for="highscoreinitial-text">Add your score: </label>
-            <input type="text" placeholder="Initials" name="userinitials" id="initialsText" />
-            <button class="saveHighScores">Save</button>
-            <button class="clearHighScores">Clear</button>
-            <button class="playAgain">Play Again</button>
-        </form>
+        <p>
+            <button class="playAgain">See My Quiz</button>
+        </p>
     </div>
 </div>
 
