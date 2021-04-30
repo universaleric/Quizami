@@ -76,6 +76,10 @@ router.get('/quizmaker/:id', async (req, res) => {
 router.get('/quiztaker/:id', async (req, res) => {
   try {
     const questionData = await Question.findAll({
+      
+      where: {
+        quiz_id: req.params.id
+      }
       // include: [
       //   {
       //     model: User,
@@ -83,11 +87,14 @@ router.get('/quiztaker/:id', async (req, res) => {
       // ],
     });
 
-    const questions = questionData.get({ plain: true });
-    console.log(questions);
+    console.log(questionData);
+    // const questions = quizData.get({ plain: true });
+    const questions = questionData.map((question) => question.get({ plain: true }));
 
+    console.log(questions);
+    
     res.render('quiztaker', {
-      // ...questions,
+      ...questions,
       logged_in: req.session.logged_in,
       user_id: req.session.user_id,
     });

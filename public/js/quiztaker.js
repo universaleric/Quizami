@@ -27,7 +27,7 @@ questQuest();
 let scoreset = [];
 
 async function questQuest() {
-  await fetch('/')
+  await fetch('/api/question/1')
     .then((questionJSON) => questionJSON.json())
     .then((questionData) => (questions = questionData));
 
