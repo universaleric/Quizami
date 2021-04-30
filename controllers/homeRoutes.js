@@ -80,11 +80,6 @@ router.get('/quiztaker/:id', async (req, res) => {
       where: {
         quiz_id: req.params.id
       }
-      // include: [
-      //   {
-      //     model: User,
-      //   },
-      // ],
     });
 
     console.log(questionData);
