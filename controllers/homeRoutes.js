@@ -93,6 +93,7 @@ router.get('/quiztaker/:id', async (req, res) => {
       ...questions,
       logged_in: req.session.logged_in,
       user_id: req.session.user_id,
+      username: req.session.use_name,
     });
   } catch (err) {
     res.status(500).json(err);

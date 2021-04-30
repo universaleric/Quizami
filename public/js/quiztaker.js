@@ -15,7 +15,11 @@ let answerBtnAEl = document.querySelector('#answerchoicea');
 let answerBtnBEl = document.querySelector('#answerchoiceb');
 let answerBtnCEl = document.querySelector('#answerchoicec');
 let answerBtnDEl = document.querySelector('#answerchoiced');
-let quiz_id = parseInt(document.location.pathname.split('/')[document.location.pathname.split('/').length-1])
+let user_idEl = document.querySelector('#user_idNumber');
+
+let user_id = parseInt(user_idEl.innerHTML);
+let quiz_id = parseInt(document.location.pathname.split('/')[document.location.pathname.split('/').length-1]);
+
 
 let secondsLeft = 1;
 let secondsPassed;
@@ -201,10 +205,7 @@ async function endGame() {
   timeBtnEl.setAttribute('style', 'display: hidden');
 
   let time = secondsPassed;
-  //This must be changed to a req.session.user_id within score routes POST route.
-  let user_id = 1;
-  // let quiz_id = parseInt(document.location.pathname.split('/')[document.location.pathname.split('/').length-1])
-  let quiz_id = 1;
+  
 
   finalScoreEl.textContent =
     'Final score: ' +
@@ -222,8 +223,8 @@ async function endGame() {
   if (scoreset) {
     const response = await fetch(`/api/score/`, {
       method: 'POST',
-      // body: JSON.stringify({quiz_id, user_id, score, time),
-      body: JSON.stringify(scoreset),
+      body: JSON.stringify({quiz_id, user_id, score, time}),
+      // body: JSON.stringify(scoreset),
       headers: {
         'Content-Type': 'application/json',
       },
@@ -231,7 +232,8 @@ async function endGame() {
 
     if (response.ok) {
       // document.location.replace('/profile');
-      console.log(question);
+      console.log("Score added")
+
     } else {
       alert('Failed to create score data');
     }

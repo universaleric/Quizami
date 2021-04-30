@@ -223,3 +223,9 @@ header button:focus {
   width: 45%;
 
 }
+
+#user_idNumber, #user_nameText {
+  visibility: hidden;
+  font-size: 1px;
+  margin: 0;
+}
