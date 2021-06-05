@@ -38,7 +38,9 @@ sequelize, dotenv, express, express-handlebars, express-session, mysql2
 
 ## Usage
 
-It can be used by anyone wanting to make and take quizzes.
+Once logged in, users are able to make, take, and comment on quizzes. Users can make quizzes from their profile page, take quizzes from the home page, and comment on quizzes on the comment screen before quizzes.
+![Quizami Screenshot](./public/images/quizami.png)
+
 
 <a name="features"></a>
 

@@ -214,8 +214,7 @@ async function endGame() {
     score +
     '\n | \n Time: ' +
     secondsPassed +
-    '\n | \n Username: ' + username +
-    '\n | \n Quiz name: ';
+    '\n | \n Username: ' + username;
 
   scoreset.push({ quiz_id, user_id, score, time });
 
