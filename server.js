@@ -8,6 +8,8 @@ const helpers = require('./utils/helpers');
 const sequelize = require('./config/connection');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
+const compression = require('compression');
+
 const app = express();
 const PORT = process.env.PORT || 3001;
 
@@ -25,6 +27,7 @@ const sess = {
 };
 
 app.use(session(sess));
+app.use(compression());
 
 // Inform Express.js on which template engine to use
 app.engine('handlebars', hbs.engine);

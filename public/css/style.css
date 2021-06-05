@@ -78,6 +78,12 @@ header button.time {
   display: none;
 }
 
+h3 {
+  color: #1b89bc;
+  font-style: italic;
+  text-align: center;
+}
+
 h1,
 h2,
 .question,

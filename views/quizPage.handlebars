@@ -4,16 +4,19 @@
   
     <div class="col-md-8">
 
-      <h2>{{quiz_name}}</h2>
-      <p>{{{get_emoji}}}</p>
+      <h3>{{quiz_name}}</h3>
       <p>Created by {{user.username}} on {{quiz.date_created}}</p>
       <p>
-        <span for="img" aria-label="money">⁉️ </span>
+        <span for="img" aria-label="Exclamation Question Marks">⁉️ </span>
         <span class="dollar-amount">{{question_length}}</span>
         questions long
       </p>
       <p>
+        {{#if logged_in}}
         <button id="quiztaker" class="btn btn-primary">Take this Quiz!</button>
+        {{else}}
+        <a href="/login" class="btn-primary btn rounded p-3">Login to take this quiz!</a>
+        {{/if}}
       </p>
       {{!-- {{#if author}}
       <button type="submit" class="btn btn-primary updater">Update</button>
@@ -26,7 +29,11 @@
           <textarea class="form-input" id="comment-desc" name="comment-desc"></textarea>
         </div>
         <div class="form-group">
+           {{#if logged_in}}
          <button type="submit" class="btn btn-primary">submit</button>
+        {{else}}
+        <a href="/login" class="btn-primary btn rounded p-3">Login to comment</a>
+        {{/if}}
         </div>
       </form>
     </div>
