@@ -5,6 +5,7 @@
 ### Description
 
 A website for users to create profiles and make and take quizzes.
+[Visit the Quizami site](https://quizami.herokuapp.com/)
 
 ## Table of Contents
 
