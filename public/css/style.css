@@ -142,6 +142,31 @@ li {
 .ctarea {
   border-color: var(--accent)!important;
 }
+
+.score-content {
+  height: 200px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  border-bottom: 1px inset var(--accent);
+  border-radius: 30px;
+}
+.score-content::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+.score-content::-webkit-scrollbar:vertical {
+  width: 4px;
+}
+
+.score-content::-webkit-scrollbar:horizontal {
+  height: 11px;
+}
+
+.score-content::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  border: 1px solid var(--accent); /* should match background, can't be transparent */
+  background-color: rgba(255, 255, 255, .7);
+}
 .question {
   padding: 15px;
   font-size: 1.5em;
