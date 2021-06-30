@@ -1,19 +1,32 @@
 <!-- Loop over each object in the quizs array -->
-{{#each quizzes as |quiz| }}
-<div class="row mb-1 project">
-  <div class="col-md-12 row">
-    <h3>
-      <!-- Call helper function with triple brackets to render the emoji span as HTML -->
-      <a href="/quiz/{{quiz.id}}">{{quiz.quiz_name}}</a>
-    </h3>
-  </div>
-    <p>
-      <span for="img" aria-label="memo pencil to paper emoji">📝</span>
-      <!-- Pass needed_funding value to the helper function -->
-      <span class="dollar-amount">{{quiz.question_length}}</span> questions 
-      <br>
-      Created by {{user.username}} on {{format_date quiz.date_created}}
-    </p>
-  {{!-- <p>Created by {{user.username}} on {{format_date quiz.date_created}}</p> --}}
+<div class="flex-row">
+
+  {{#each quizzes as |quiz| }}
+    
+    <div class="mt-2 pt-2 px-5 col-md-6 col-12">
+      <div class="project flex-row mx-auto pb-0">
+        
+        <div class="col-md-6 col-12 display-flex justify-center">
+          <button class="quizBtns">
+            <!-- Call helper function with triple brackets to render the emoji span as HTML -->
+            <h3>
+            <a href="/quiz/{{quiz.id}}">{{quiz.quiz_name}}</a>
+            </h3>
+          </button>
+        </div>
+
+        <div class="col-md-6 col-12">
+          <p>
+            <span for="img" aria-label="memo pencil to paper emoji">📝</span>
+            <!-- Pass needed_funding value to the helper function -->
+            <span class="question-length">{{quiz.question_length}}</span> questions 
+            <br>
+            by {{user.username}} | {{format_date quiz.date_created}}
+          </p>
+        </div>
+      </div>
+      {{!-- <p>Created by {{user.username}} on {{format_date quiz.date_created}}</p> --}}
+    </div>
+
+  {{/each}}
 </div>
-{{/each}}

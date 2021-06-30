@@ -1,11 +1,38 @@
-<div class="text-center">
+<div class="text-center mt-5">
 
   <div class="row">
+
+    {{#if scores.length}}
+    <div class="mb-1 pb-1 col-md-4 score-content comment-list c-box justify-center">
+    <h5 class="text-center mt-3">Scores</h5>
+
+    {{#each scores as |score|}}
+    <div class="flex-row my-1 mx-auto c-div align-center col-11">
+      
+      <div class="col-md-9 text-left">
+        <p class="my-auto ml-3">
+          {{score.score}} correct, {{score.time}} seconds
+        </p>
+      </div>
+
+      <div class="col-md-2">
+        <p class="my-auto">{{ score.user_id}} </p>
+        {{#if author}}
+        <div class="col-md-1">
+          <button class="btn btn-sm btn-danger" data-id="{{score.id}}">DELETE</button>
+        </div>
+        {{/if}}
+      </div>
+          
+    </div>
+    {{/each}}
+  </div>
+{{/if}}
   
-    <div class="col-md-8">
+    <div class="col-md-4">
 
       <h3>{{quiz_name}}</h3>
-      <p>Created by {{user.username}} on {{quiz.date_created}}</p>
+      <p class="mb-0">Created by {{user.username}} on {{quiz.date_created}}</p>
       <p>
         <span for="img" aria-label="Exclamation Question Marks">⁉️ </span>
         <span class="dollar-amount">{{question_length}}</span>
@@ -26,7 +53,7 @@
       <form class="form new-comment-form">
         <div class="form-group">
           <label for="comment-desc">comment:</label>
-          <textarea class="form-input" id="comment-desc" name="comment-desc"></textarea>
+          <textarea class="form-input ctarea" id="comment-desc" name="comment-desc"></textarea>
         </div>
         <div class="form-group">
            {{#if logged_in}}
@@ -60,29 +87,32 @@
 
 </div>
 
+{{!-- <div class="c-title"></div> --}}
+
+
 {{#if comments.length}}
-  <div class="col-md-12 mt-4 comment-list c-box">
-    <h3 class="text-center">Comments</h3>
+  <div class="col-md-12 mt-4 comment-list c-box justify-center">
+    <div class="c-title"></div>
+    <h5 class="text-center mt-3">Comments</h5>
 
     {{#each comments as |comment|}}
-    <div class="row mb-2">
+    <div class="flex-row my-1 mx-auto c-div align-center col-11">
       
       <div class="col-md-9 text-left">
-        <p>
+        <p class="my-auto ml-3">
           {{comment.description}}
         </p>
       </div>
 
       <div class="col-md-2">
-        <p>{{comment.user_name}} on {{format_date comment.date_created}}</p>
+        <p class="my-auto">{{comment.user_name}} on {{format_date comment.date_created}}</p>
+        {{#if author}}
+        <div class="col-md-1">
+          <button class="btn btn-sm btn-danger" data-id="{{comment.id}}">DELETE</button>
+        </div>
+        {{/if}}
       </div>
-            
-      {{#if author}}
-      <div class="col-md-1">
-        <button class="btn btn-sm btn-danger" data-id="{{comment.id}}">DELETE</button>
-      </div>
-      {{/if}}
-  
+          
     </div>
     {{/each}}
   </div>

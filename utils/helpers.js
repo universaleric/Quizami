@@ -1,3 +1,6 @@
+const router = require('express').Router();
+const  User  = require('../models/User');
+
 module.exports = {
   format_date: (date) => {
     // Format date as MM/DD/YYYY
@@ -19,4 +22,17 @@ module.exports = {
       return `<span for="img" aria-label="gear">⚙️</span>`;
     }
   },
+  get_username: async (user_id) => {  
+    // convert user_id to username
+    try {
+        const userData = await User.findByPk(user_id, { 
+      });
+      const user = await userData.get({ plain: true });
+      console.log(user)
+      return await user.user_name
+    } catch (err) {
+        return err
+    }
+    
+  }
 };

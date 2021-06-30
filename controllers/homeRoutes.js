@@ -41,13 +41,18 @@ router.get('/quiz/:id', async (req, res) => {
             model: Comment,
             attributes: ['description', 'date_created', 'quiz_id', 'user_id', 'user_name', 'id'],
           },
+          {
+            model: Score,
+            attributes: ['quiz_id', 'user_id', 'score', 'time'],
+          },
         ],
     });
 
     const quiz = quizData.get({ plain: true });
     let authorcheck = Boolean(quiz.user_id === req.session.user_id)
-
-    console.log(quiz);
+    // console.log(quizData);
+    // console.log(quiz);
+    // console.log("Res:" + res);
 
     res.render('quizPage', {
       ...quiz,
